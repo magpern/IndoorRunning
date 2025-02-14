@@ -10,6 +10,8 @@
             background-color: #f4f4f4;
             margin: 20px;
             padding: 20px;
+            -webkit-print-color-adjust: exact; /* Ensures background color prints */
+            print-color-adjust: exact;
         }
         .workout-container {
             background: white;
@@ -36,6 +38,14 @@
         .highlight {
             color: red;
             font-weight: bold;
+        }
+        @media print {
+            body {
+                background-color: #f4f4f4 !important;
+            }
+            .section {
+                background: #e3e3e3 !important;
+            }
         }
     </style>
 </head>
