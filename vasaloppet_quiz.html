@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vasaloppet & Skidquiz</title>
+    <style>
+        .correct { color: green; font-weight: bold; }
+        .incorrect { color: red; font-weight: bold; }
+    </style>
+    <script>
+        const questions = [
+			{ question: "Vad firas genom Vasaloppet?", options: ["Gustav Vasas flykt från danskarna", "Sveriges självständighet från Norge", "Skidåkningens historia i Sverige", "Slutet på Stockholms blodbad"], correct: 0 },
+            { question: "Vilket år gick det första officiella Vasaloppet?", options: ["1523", "1922", "1821", "1965"], correct: 1 },
+            { question: "Hur långt är Vasaloppet?", options: ["30 km", "90 km", "50 km", "100 km"], correct: 1 },
+            { question: "Vilken historisk händelse ledde till Gustav Vasas flykt?", options: ["Kalmarunionens upplösning", "Stockholms blodbad", "Freden i Brömsebro", "Dackefejden"], correct: 1 },
+            { question: "Varför sägs det att Gustav Vasa åkte skidor till Dalarna?", options: ["För att samla stöd mot den danske kungen", "För att besöka sin familj i Falun", "För att träna inför en tävling", "För att fly från Karl XII"], correct: 0 },
+            { question: "Vilken teknik används i klassisk längdskidåkning?", options: ["Skate", "Diagonalåkning", "Carving", "Stakning"], correct: 1 },
+            { question: "Vad kallas den vätska som används för bättre glid på skidor?", options: ["Fett", "Valla", "Olja", "Smörjmedel"], correct: 1 },
+            { question: "Vilken del av kroppen är viktigast för stakning i längdskidåkning?", options: ["Ben", "Armar och bål", "Axlar och nacke", "Fötter"], correct: 1 },
+            { question: "Hur många kontrollstationer finns längs Vasaloppsbanan?", options: ["3", "5", "7", "10"], correct: 2 },
+            { question: "Vilken dryck är mest känd vid Vasaloppskontrollerna?", options: ["Varm choklad", "Sportdryck", "Blåbärssoppa", "Kaffe"], correct: 2 },
+            { question: "Vilken stad är målet för Vasaloppet?", options: ["Falun", "Sälen", "Mora", "Östersund"], correct: 2 },
+            { question: "Vem var kung i Danmark vid tiden för Stockholms blodbad?", options: ["Christian II", "Gustav Vasa", "Karl XII", "Erik XIV"], correct: 0 },
+            { question: "Hur många dagar efter Stockholms blodbad flydde Gustav Vasa?", options: ["1 dag", "10 dagar", "1 månad", "3 månader"], correct: 1 },
+            { question: "Vilket år blev Gustav Vasa kung av Sverige?", options: ["1512", "1523", "1530", "1545"], correct: 1 },
+            { question: "Vilken känd svensk skidlöpare har flest segrar i Vasaloppet?", options: ["Gunde Svan", "Jörgen Brink", "Nils Karlsson", "Anders Aukland"], correct: 2 },
+            { question: "Vilket av följande länder har den starkaste traditionen inom längdskidåkning?", options: ["Brasilien", "Sverige", "Egypten", "Australien"], correct: 1 },
+            { question: "Vilken del av kroppen arbetar mest vid diagonalåkning?", options: ["Armar", "Ben", "Bål", "Händer"], correct: 1 },
+            { question: "Vad innebär det om en åkare 'bonkar' under Vasaloppet?", options: ["Åker vilse", "Går in i väggen av utmattning", "Välter i en utförsbacke", "Tappar sin nummerlapp"], correct: 1 },
+            { question: "Vad kallas den sista backen innan mål i Mora?", options: ["Eldsbacken", "Mördarbacken", "Zornbacken", "Målhöjden"], correct: 3 },
+            { question: "Hur många gånger har Vasaloppet ställts in på grund av snöbrist?", options: ["Aldrig", "En gång", "Tre gånger", "Fem gånger"], correct: 1 },
+            { question: "Vad är en ‘blåbärsåkare’ i Vasaloppet?", options: ["En åkare som deltar för nöjes skull", "En elitåkare", "Någon som åker i fel spår", "En åkare som kör med blåa skidor"], correct: 0 },
+            { question: "Vilken är den mest krävande sektionen av Vasaloppsbanan?", options: ["Mångsbodarna", "Evertsberg", "Risberg", "Lundbäcksbackarna"], correct: 3 },
+            { question: "Hur lång tid tog det för den snabbaste vinnaren att genomföra Vasaloppet?", options: ["2 timmar", "3 timmar", "4 timmar", "5 timmar"], correct: 1 },
+            { question: "Vad står det på skylten vid målgången i Mora?", options: ["Äntligen framme", "I fäders spår", "Här vilar hjältarna", "Seger och ära"], correct: 1 }
+        ];
+
+        function loadQuiz() {
+            let quizContainer = document.getElementById("quiz");
+            questions.forEach((q, index) => {
+                let div = document.createElement("div");
+                div.innerHTML = `<p id='q${index}'>${index + 1}. ${q.question}</p>`;
+                q.options.forEach((opt, optIndex) => {
+                    div.innerHTML += `<input type='radio' name='q${index}' value='${optIndex}' id='q${index}o${optIndex}'> <label for='q${index}o${optIndex}'>${opt}</label><br>`;
+                });
+                quizContainer.appendChild(div);
+            });
+            quizContainer.innerHTML += "<button onclick='checkAnswers()'>Skicka svar</button>";
+        }
+
+        function checkAnswers() {
+            questions.forEach((q, index) => {
+                let selected = document.querySelector(`input[name='q${index}']:checked`);
+                q.options.forEach((opt, optIndex) => {
+                    let label = document.querySelector(`label[for='q${index}o${optIndex}']`);
+                    if (optIndex === q.correct) {
+                        label.className = "correct";
+                    } else if (selected && parseInt(selected.value) === optIndex) {
+                        label.className = "incorrect";
+                    }
+                });
+            });
+        }
+    </script>
+</head>
+<body onload="loadQuiz()">
+    <h1>Vasaloppet & Skidquiz</h1>
+    <div id="quiz"></div>
+</body>
+</html>
