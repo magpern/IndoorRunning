@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hill + Speed – 45 min</title>
+  <style>
+    :root { --ink:#18313b; --line:#284954; --paper:#f3f6f5; --rest:#6b7b81; --blue:#087dc4; --orange:#d56300; --green:#008d49; --red:#ef0640; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    main { max-width:680px; margin:0 auto; padding:32px 18px 112px; }
+    h1 { margin:0; font-size:2rem; }
+    .intro { margin:4px 0 26px; color:#52666d; }
+    .block { background:#fff; border:3px solid var(--line); border-radius:14px; overflow:hidden; margin:18px 0; box-shadow:0 2px 0 #ced7d8; }
+    .block h2 { margin:0; padding:11px 16px; color:#fff; font-size:1.08rem; }
+    .block-head { display:flex; align-items:center; justify-content:space-between; }
+    .play { width:38px; height:38px; margin-right:8px; border:1px solid rgba(255,255,255,.7); border-radius:50%; background:rgba(255,255,255,.14); color:#fff; font-size:1rem; line-height:1; cursor:pointer; }
+    .play.active { background:#fff; color:var(--ink); }
+    .blue .block-head { background:var(--blue); } .orange .block-head { background:var(--orange); } .green .block-head { background:var(--green); }
+    .content { padding:15px 16px 17px; }
+    .time { margin:0 0 7px; color:#4c6269; font-size:.9rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
+    .instruction { margin:0; font-size:1.18rem; font-weight:650; }
+    .sets { display:inline-block; margin-top:13px; padding:4px 10px; border-radius:99px; background:#e6edef; font-weight:700; }
+    .intervals { margin-top:14px; border-top:1px solid #d5dfe1; }
+    .interval { display:grid; grid-template-columns:1fr 1.4fr; gap:16px; padding:8px 2px; border-bottom:1px solid #d5dfe1; }
+    .interval span:first-child { font-weight:700; }
+    .interval span:last-child { text-align:right; font-weight:650; }
+    .rest { margin:12px 0 12px 20px; color:var(--rest); font-weight:700; }
+    .rest span { display:inline-block; min-width:4.6rem; color:#fff; background:var(--red); border-radius:99px; padding:4px 10px; text-align:center; }
+    .start-end { display:grid; grid-template-columns:1fr auto 1fr; gap:8px; align-items:center; margin-top:13px; color:#53686e; font-size:.94rem; }
+    .start-end::before, .start-end::after { content:""; height:1px; background:#c7d2d4; }
+    .screen-toggle { display:flex; align-items:center; gap:10px; margin:14px 0 26px; color:#40555d; font-weight:650; }
+    .screen-toggle input { appearance:none; width:44px; height:25px; margin:0; border-radius:99px; background:#9aa9ae; position:relative; cursor:pointer; transition:.2s; }
+    .screen-toggle input::after { content:""; position:absolute; width:19px; height:19px; top:3px; left:3px; border-radius:50%; background:#fff; transition:.2s; }
+    .screen-toggle input:checked { background:var(--green); }
+    .screen-toggle input:checked::after { transform:translateX(19px); }
+    .timer-footer { position:fixed; z-index:10; right:0; bottom:0; left:0; display:none; background:var(--ink); color:#fff; box-shadow:0 -4px 18px rgba(0,0,0,.2); }
+    .timer-footer.visible { display:block; }
+    .timer-inner { max-width:680px; min-height:82px; margin:auto; padding:12px 18px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .timer-label { margin:0 0 2px; font-size:.82rem; color:#cfe1e5; }
+    .timer-value { margin:0; font-size:2rem; font-weight:750; letter-spacing:.04em; font-variant-numeric:tabular-nums; }
+    .stop-timer { border:1px solid #bfd1d5; border-radius:7px; background:transparent; color:#fff; padding:9px 12px; font:inherit; font-weight:700; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Hill + Speed – 45 min</h1>
+    <p class="intro">Löpbandspass med backe, fart och återhämtning.</p>
+    <label class="screen-toggle"><input id="keep-awake" type="checkbox" role="switch"><span>Håll skärmen vaken</span></label>
+    <section class="block orange" data-duration="270" data-label="Uppvärmning"><div class="block-head"><h2>Uppvärmning</h2><button class="play" type="button" aria-label="Starta uppvärmning">▶</button></div><div class="content"><p class="time">4:30</p><p class="instruction">Lugn uppvärmning</p></div></section>
+
+    <section class="block green" data-duration="300" data-label="Backe upp"><div class="block-head"><h2>Backe upp</h2><button class="play" type="button" aria-label="Starta Backe upp">▶</button></div><div class="content"><p class="time">5:00 totalt</p><div class="intervals"><div class="interval"><span>1 min</span><span>0 %</span></div><div class="interval"><span>1 min</span><span>2 %</span></div><div class="interval"><span>1 min</span><span>4 %</span></div><div class="interval"><span>1 min</span><span>6 %</span></div><div class="interval"><span>1 min</span><span>8 %</span></div></div></div></section>
+    <p class="rest">Vila <span>1:00</span></p>
+
+    <section class="block green" data-duration="300" data-label="Backe ned"><div class="block-head"><h2>Backe ned</h2><button class="play" type="button" aria-label="Starta Backe ned">▶</button></div><div class="content"><p class="time">5:00 totalt</p><div class="intervals"><div class="interval"><span>1 min</span><span>8 %</span></div><div class="interval"><span>1 min</span><span>6 %</span></div><div class="interval"><span>1 min</span><span>4 %</span></div><div class="interval"><span>1 min</span><span>2 %</span></div><div class="interval"><span>1 min</span><span>0 %</span></div></div></div></section>
+    <p class="rest">Vila <span>1:00</span></p>
+
+    <section class="block green" data-duration="300" data-label="Fart upp"><div class="block-head"><h2>Fart upp</h2><button class="play" type="button" aria-label="Starta Fart upp">▶</button></div><div class="content"><p class="time">5:00 totalt</p><div class="intervals"><div class="interval"><span>1 min</span><span>+0,5 km/h</span></div><div class="interval"><span>1 min</span><span>+0,5 km/h</span></div><div class="interval"><span>1 min</span><span>+0,5 km/h</span></div><div class="interval"><span>1 min</span><span>+0,5 km/h</span></div><div class="interval"><span>1 min</span><span>+0,5 km/h</span></div></div></div></section>
+    <p class="rest">Vila <span>1:00</span></p>
+
+    <section class="block green" data-duration="300" data-label="Fart ned"><div class="block-head"><h2>Fart ned</h2><button class="play" type="button" aria-label="Starta Fart ned">▶</button></div><div class="content"><p class="time">5:00 totalt</p><div class="intervals"><div class="interval"><span>1 min</span><span>−0,5 km/h</span></div><div class="interval"><span>1 min</span><span>−0,5 km/h</span></div><div class="interval"><span>1 min</span><span>−0,5 km/h</span></div><div class="interval"><span>1 min</span><span>−0,5 km/h</span></div><div class="interval"><span>1 min</span><span>Samma hastighet</span></div></div></div></section>
+    <p class="rest">Vila <span>1:00</span></p>
+
+    <section class="block green" data-duration="200" data-label="Kort backe upp"><div class="block-head"><h2>Kort backe upp</h2><button class="play" type="button" aria-label="Starta Kort backe upp">▶</button></div><div class="content"><p class="time">3:20 totalt</p><div class="intervals"><div class="interval"><span>40 sek</span><span>0 %</span></div><div class="interval"><span>40 sek</span><span>2 %</span></div><div class="interval"><span>40 sek</span><span>4 %</span></div><div class="interval"><span>40 sek</span><span>6 %</span></div><div class="interval"><span>40 sek</span><span>8 %</span></div></div></div></section>
+    <p class="rest">Vila <span>1:00</span></p>
+
+    <section class="block green" data-duration="200" data-label="Kort backe ned"><div class="block-head"><h2>Kort backe ned</h2><button class="play" type="button" aria-label="Starta Kort backe ned">▶</button></div><div class="content"><p class="time">3:20 totalt</p><div class="intervals"><div class="interval"><span>40 sek</span><span>8 %</span></div><div class="interval"><span>40 sek</span><span>6 %</span></div><div class="interval"><span>40 sek</span><span>4 %</span></div><div class="interval"><span>40 sek</span><span>2 %</span></div><div class="interval"><span>40 sek</span><span>0 %</span></div></div></div></section>
+    <p class="rest">Vila <span>1:00</span></p>
+
+    <section class="block green" data-duration="200" data-label="Kort fart upp"><div class="block-head"><h2>Kort fart upp</h2><button class="play" type="button" aria-label="Starta Kort fart upp">▶</button></div><div class="content"><p class="time">3:20 totalt</p><div class="intervals"><div class="interval"><span>40 sek</span><span>+0,5 km/h</span></div><div class="interval"><span>40 sek</span><span>+0,5 km/h</span></div><div class="interval"><span>40 sek</span><span>+0,5 km/h</span></div><div class="interval"><span>40 sek</span><span>+0,5 km/h</span></div><div class="interval"><span>40 sek</span><span>+0,5 km/h</span></div></div></div></section>
+
+    <section class="block blue" data-duration="120" data-label="Återhämtning"><div class="block-head"><h2>Återhämtning</h2><button class="play" type="button" aria-label="Starta återhämtning">▶</button></div><div class="content"><p class="time">2:00</p><p class="instruction">Lugn återhämtning.</p></div></section>
+  </main>
+  <footer class="timer-footer" id="timer-footer" aria-live="polite"><div class="timer-inner"><div><p class="timer-label" id="timer-label"></p><p class="timer-value" id="timer-value">0:00</p></div><button class="stop-timer" id="stop-timer" type="button">Stoppa</button></div></footer>
+  <script>
+    (() => {
+      const blocks = [...document.querySelectorAll('.block[data-duration]')];
+      const footer = document.querySelector('#timer-footer');
+      const label = document.querySelector('#timer-label');
+      const value = document.querySelector('#timer-value');
+      const stopButton = document.querySelector('#stop-timer');
+      const keepAwake = document.querySelector('#keep-awake');
+      let activeBlock = null, endTime = 0, intervalId = null, wakeLock = null;
+      const format = seconds => `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
+      const releaseWakeLock = async () => { if (wakeLock) { await wakeLock.release(); wakeLock = null; } };
+      const requestWakeLock = async () => { if (keepAwake.checked && 'wakeLock' in navigator && document.visibilityState === 'visible') { try { wakeLock = await navigator.wakeLock.request('screen'); } catch (_) {} } };
+      const reset = () => { clearInterval(intervalId); intervalId = null; footer.classList.remove('visible'); if (activeBlock) { const button = activeBlock.querySelector('.play'); button.classList.remove('active'); button.textContent = '▶'; button.setAttribute('aria-label', `Starta ${activeBlock.dataset.label}`); } activeBlock = null; endTime = 0; };
+      const tick = () => { const remaining = Math.max(0, Math.ceil((endTime - Date.now()) / 1000)); value.textContent = format(remaining); if (remaining === 0) reset(); };
+      const start = block => { if (block === activeBlock) { reset(); return; } reset(); activeBlock = block; endTime = Date.now() + Number(block.dataset.duration) * 1000; const button = block.querySelector('.play'); button.classList.add('active'); button.textContent = '■'; button.setAttribute('aria-label', `Stoppa ${block.dataset.label}`); label.textContent = block.dataset.label; footer.classList.add('visible'); tick(); intervalId = setInterval(tick, 250); requestWakeLock(); };
+      blocks.forEach(block => block.querySelector('.play').addEventListener('click', () => start(block)));
+      stopButton.addEventListener('click', reset);
+      keepAwake.addEventListener('change', () => keepAwake.checked ? requestWakeLock() : releaseWakeLock());
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') requestWakeLock(); });
+    })();
+  </script>
+</body>
+</html>
